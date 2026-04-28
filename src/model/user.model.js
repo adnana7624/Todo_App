@@ -20,6 +20,11 @@ const userSchema = new Schema({
      },
      phoneN0 : {
         type : Number
+     },
+     role:{
+      type : String,
+      enum : ["user","admin"],
+      default : "user"
      }
 
 },{timestamps : true})

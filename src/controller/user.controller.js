@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 
 export const signup = async (req , res) => {
     try {
-        const {name,fname,email,password,phoneN0 } = req.body;
+        const {name,fname,email,password,phoneN0,role } = req.body;
     
         const exist = await User.findOne({email})
     
@@ -19,7 +19,8 @@ export const signup = async (req , res) => {
             fname,
             email,
             password:hash,
-            phoneN0
+            phoneN0,
+            role : role || "user"
         })
         return res.status(200).json({message:"user registered successfully"})
     } catch (error) {
@@ -44,7 +45,10 @@ export const login = async(req,res) => {
         }
 
         const token = jwt.sign(
-            {id : user._id},
+            {
+                id : user._id,
+                role : user.role
+            },
             process.env.JWT_SECRET,
             {expiresIn : "1d"}
         )
