@@ -5,11 +5,18 @@ import jwt from "jsonwebtoken";
 export const signup = async (req , res) => {
     try {
         const {name,fname,email,password,phoneN0,role } = req.body;
+        // basic valtion
+        if(!name || !fname || !email || !password || !phoneN0 || !role){
+            return res.status(401).json({
+                success : false,
+                message : "all field are requred"
+            })
+        }
     
         const exist = await User.findOne({email})
     
         if(exist){
-            return res.status(401).json({message:"user alredy exist"})
+            return res.status(409).json({message:"user alredy exist"})
         }
     
         const hash = await bcrypt.hash(password,10)

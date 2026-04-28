@@ -1,6 +1,7 @@
 import express from "express";
 import {signup , login} from "../controller/user.controller.js";
-import { verifyjwt , isadmin } from "../middleware/auth.middleware.js";
+import { verifyjwt } from "../middleware/auth.middleware.js";
+import {isadmin} from "../middleware/admin.middleware.js";
 
 const router = express.Router();
 

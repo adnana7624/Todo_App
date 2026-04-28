@@ -11,7 +11,8 @@ app.use("/api/user",router)
 
 
 
-app.get("/", (req,res) =>{
+app.get("/",  (req,res) =>{
+    res.cookie("name","adnna");
     res.send("hallo")
 })
 
